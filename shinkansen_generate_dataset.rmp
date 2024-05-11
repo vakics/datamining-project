@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><process version="10.4.000">
+  <context>
+    <input/>
+    <output/>
+    <macros/>
+  </context>
+  <operator activated="true" class="process" compatibility="10.4.000" expanded="true" name="Process">
+    <parameter key="logverbosity" value="init"/>
+    <parameter key="random_seed" value="2001"/>
+    <parameter key="send_mail" value="never"/>
+    <parameter key="notification_email" value=""/>
+    <parameter key="process_duration_for_mail" value="30"/>
+    <parameter key="encoding" value="SYSTEM"/>
+    <process expanded="true">
+      <operator activated="true" class="read_csv" compatibility="10.4.000" expanded="true" height="68" name="Read CSV" width="90" x="45" y="34">
+        <parameter key="csv_file" value="D:/egyetem/PTI Msc/2. félév/Adatbánya/Surveydata_train_(1)_(1).csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="multiline_text" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="use_header_row" value="true"/>
+        <parameter key="header_row" value="1"/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information"/>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="read_csv" compatibility="10.4.000" expanded="true" height="68" name="Read CSV (2)" width="90" x="45" y="136">
+        <parameter key="csv_file" value="D:/egyetem/PTI Msc/2. félév/Adatbánya/Traveldata_train_(1)_(2).csv"/>
+        <parameter key="column_separators" value=","/>
+        <parameter key="trim_lines" value="false"/>
+        <parameter key="multiline_text" value="false"/>
+        <parameter key="use_quotes" value="true"/>
+        <parameter key="quotes_character" value="&quot;"/>
+        <parameter key="escape_character" value="\"/>
+        <parameter key="skip_comments" value="false"/>
+        <parameter key="comment_characters" value="#"/>
+        <parameter key="starting_row" value="1"/>
+        <parameter key="parse_numbers" value="true"/>
+        <parameter key="decimal_character" value="."/>
+        <parameter key="grouped_digits" value="false"/>
+        <parameter key="grouping_character" value=","/>
+        <parameter key="infinity_representation" value=""/>
+        <parameter key="date_format" value=""/>
+        <parameter key="use_header_row" value="true"/>
+        <parameter key="header_row" value="1"/>
+        <parameter key="first_row_as_names" value="true"/>
+        <list key="annotations"/>
+        <parameter key="time_zone" value="SYSTEM"/>
+        <parameter key="locale" value="English (United States)"/>
+        <parameter key="encoding" value="SYSTEM"/>
+        <parameter key="read_all_values_as_polynominal" value="false"/>
+        <list key="data_set_meta_data_information"/>
+        <parameter key="read_not_matching_values_as_missings" value="true"/>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="10.4.000" expanded="true" height="82" name="Set Role (2)" width="90" x="179" y="136">
+        <list key="set_roles">
+          <parameter key="ID" value="id"/>
+        </list>
+      </operator>
+      <operator activated="true" class="blending:set_role" compatibility="10.4.000" expanded="true" height="82" name="Set Role" width="90" x="179" y="34">
+        <list key="set_roles">
+          <parameter key="Overall_Experience" value="label"/>
+          <parameter key="ID" value="id"/>
+        </list>
+      </operator>
+      <operator activated="true" class="concurrency:join" compatibility="10.4.000" expanded="true" height="82" name="Join" width="90" x="313" y="34">
+        <parameter key="remove_double_attributes" value="true"/>
+        <parameter key="join_type" value="inner"/>
+        <parameter key="use_id_attribute_as_key" value="true"/>
+        <list key="key_attributes"/>
+        <parameter key="keep_both_join_attributes" value="false"/>
+      </operator>
+      <operator activated="true" class="map" compatibility="10.4.000" expanded="true" height="82" name="Map" width="90" x="380" y="187">
+        <parameter key="attribute_filter_type" value="subset"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="Arrival_time_convenient|Baggage_handling|Catering|Cleanliness|Leg_room|Onboard_entertainment|Onboard_service|Onboardwifi_service|Online_support|Onlinebooking_Ease|Seat_comfort|Checkin_service|Online_boarding"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <list key="value_mappings">
+          <parameter key="acceptable" value="3"/>
+          <parameter key="need improvement" value="2"/>
+          <parameter key="good" value="4"/>
+          <parameter key="poor" value="1"/>
+          <parameter key="excellent" value="5"/>
+          <parameter key="extremely poor" value="0"/>
+          <parameter key="MISSING" value="-1"/>
+        </list>
+        <parameter key="consider_regular_expressions" value="false"/>
+        <parameter key="add_default_mapping" value="false"/>
+      </operator>
+      <operator activated="true" class="map" compatibility="10.4.000" expanded="true" height="82" name="Map (2)" width="90" x="514" y="187">
+        <parameter key="attribute_filter_type" value="subset"/>
+        <parameter key="attribute" value=""/>
+        <parameter key="attributes" value="Platform_location"/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="attribute_value"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="time"/>
+        <parameter key="block_type" value="attribute_block"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_matrix_row_start"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="false"/>
+        <list key="value_mappings">
+          <parameter key="manageable" value="3"/>
+          <parameter key="Convinient" value="4"/>
+          <parameter key="need improvement" value="2"/>
+          <parameter key="Inconvinient" value="1"/>
+          <parameter key="very convinient" value="5"/>
+          <parameter key="very inconvinient" value="0"/>
+          <parameter key="MISSING" value="-1"/>
+        </list>
+        <parameter key="consider_regular_expressions" value="false"/>
+        <parameter key="add_default_mapping" value="false"/>
+      </operator>
+      <operator activated="true" class="numerical_to_binominal" compatibility="10.4.000" expanded="true" height="82" name="Numerical to Binominal" width="90" x="581" y="34">
+        <parameter key="attribute_filter_type" value="single"/>
+        <parameter key="attribute" value="Overall_Experience"/>
+        <parameter key="attributes" value=""/>
+        <parameter key="use_except_expression" value="false"/>
+        <parameter key="value_type" value="numeric"/>
+        <parameter key="use_value_type_exception" value="false"/>
+        <parameter key="except_value_type" value="real"/>
+        <parameter key="block_type" value="value_series"/>
+        <parameter key="use_block_type_exception" value="false"/>
+        <parameter key="except_block_type" value="value_series_end"/>
+        <parameter key="invert_selection" value="false"/>
+        <parameter key="include_special_attributes" value="true"/>
+        <parameter key="min" value="0.0"/>
+        <parameter key="max" value="0.0"/>
+      </operator>
+      <operator activated="true" class="store" compatibility="10.4.000" expanded="true" height="68" name="Store" width="90" x="715" y="34">
+        <parameter key="repository_entry" value="../data/shinkansen"/>
+      </operator>
+      <connect from_op="Read CSV" from_port="output" to_op="Set Role" to_port="example set input"/>
+      <connect from_op="Read CSV (2)" from_port="output" to_op="Set Role (2)" to_port="example set input"/>
+      <connect from_op="Set Role (2)" from_port="example set output" to_op="Join" to_port="right"/>
+      <connect from_op="Set Role" from_port="example set output" to_op="Join" to_port="left"/>
+      <connect from_op="Join" from_port="join" to_op="Map" to_port="example set input"/>
+      <connect from_op="Map" from_port="example set output" to_op="Map (2)" to_port="example set input"/>
+      <connect from_op="Map (2)" from_port="example set output" to_op="Numerical to Binominal" to_port="example set input"/>
+      <connect from_op="Numerical to Binominal" from_port="example set output" to_op="Store" to_port="input"/>
+      <connect from_op="Store" from_port="through" to_port="result 1"/>
+      <portSpacing port="source_input 1" spacing="0"/>
+      <portSpacing port="sink_result 1" spacing="0"/>
+      <portSpacing port="sink_result 2" spacing="0"/>
+    </process>
+  </operator>
+</process>
